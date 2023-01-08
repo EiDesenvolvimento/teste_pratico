@@ -26,14 +26,6 @@
             </div>
         </div>
     </div>
-
-    <%--    
-        Ah sim é um formulário muito bonito que utiliza o Bootstrap!
-        Mas parece que falta alguma coisa faltando nele para você conseguir iniciar.
-        Observe atentamente os controles!
-        Esses controles também são conhecidos por Server Controls... fazem parte do Server Side (Luke, come to the dark side... =S).
-    --%>
-
     <div class="row">
         <div class="col-md-12">
             <h2>Cadastro de pessoas</h2>
@@ -105,7 +97,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="btnGravar_Click"/>
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
     </div>
