@@ -21,8 +21,16 @@ namespace EISOL_TestePraticoWebForms
              * Você está livre para espiar os códigos e entender o seu funcionamento.
              * Só não vai me bagunçar os códigos pois deu muito trabalho fazer tudo isso aqui =/
              * */
-            var pessoa = new DAO.PESSOAS();
 
+            var pessoa = new DAO.PESSOAS();
+            pessoa.NOME = txtNome.Text;
+            pessoa.CPF = txtCpf.Text;
+            pessoa.RG = txtRg.Text;
+            pessoa.TELEFONE = txtTelefone.Text;
+            pessoa.EMAIL = txtEmail.Text;
+            pessoa.SEXO = ddlSexo.Text;
+            var dataArray = txtDataNascimento.Text.Split('/');
+            pessoa.DATA_NASCIMENTO = Convert.ToDateTime($"{dataArray[1]}/{dataArray[0]}/{dataArray[2]}");
             // Parece que faltam algumas coisas aqui! =/
 
             // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
