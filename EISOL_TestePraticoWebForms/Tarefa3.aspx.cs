@@ -32,7 +32,14 @@ namespace EISOL_TestePraticoWebForms
             this.ddlCidades.DataBind();
         }
 
-        // Cadê o evento?
-        // É isso que você deve fazer para finalizar essa tarefa!
+         protected void SelectDdlUF(object sender, EventArgs e)
+        {
+            this.ddlCidades.Items.Clear();
+            this.ddlCidades.DataSource = new BLL.CIDADES().CarregarPorUF(Decimal.Parse(this.ddlUf.SelectedValue));
+            this.ddlCidades.DataTextField = "NOME";
+            this.ddlCidades.DataValueField = "COD_CIDADE";
+            this.ddlCidades.DataBind();
+
+        }
     }
 }

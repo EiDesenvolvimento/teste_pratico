@@ -8,8 +8,12 @@
 
 var TAREFA2 = TAREFA2 || {
     Carregar: () => {
-        $("[id$='_btnEstranho']").on('click', () => {
+        $("[id$='btnEstranho']").on('click', () => {
             return TAREFA2.Autodestruir();
+        });
+
+        $("[id$='btnGravar']").on('click', () => {
+            return TAREFA2.Gravar();
         });
     },
     Autodestruir: () => {
@@ -19,6 +23,9 @@ var TAREFA2 = TAREFA2 || {
         }, 3000);
         return false;
     },
+    Gravar: () => {
+
+    }
 }
 
 // Isso aqui são coisas que usamos pra fazer os scripts funcionarem bem com o WebForms

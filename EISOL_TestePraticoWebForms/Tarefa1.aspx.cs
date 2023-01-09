@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace EISOL_TestePraticoWebForms
 {
     public partial class Tarefa1 : System.Web.UI.Page
     {
+        protected List<string> ErrorList;
+        protected DateTime DataNascimentoConvertida;
         protected void Page_Load(object sender, EventArgs e)
         {
+            var pessoas = new BLL.PESSOAS();
+            List<DAO.PESSOAS> pessoasList = pessoas.CarregarTodos();
             // Para saber se o seu registro foi realmente adicionado à tabela, utilize um dos métodos de BLL.PESSOAS.
             // Você poderá realizar a depuração aqui no VS e conferir se tudo deu certo.
             // Sinta-se livre para fazer a sua arte, mas tente fazer o formulário funcionar ok!
@@ -13,29 +19,30 @@ namespace EISOL_TestePraticoWebForms
 
         protected void btnGravar_Click(object sender, EventArgs e)
         {
-            /* Olá!
-             * Trabalhamos com camadas de acesso a dados e negócios, isso também é conhecido por arquitetura em camadas ou N-Tier.
-             * Observe que passamos um objeto tipado da camada de acesso (DAO - Data Access Object).
-             * E devemos utilizar esse objeto DAO e chamar os métodos da camada de negócios (BLL - Business Logical Layer).
-             * É o que por padrão o MVC te induz a fazer, mas aqui no WebForms devemos ter esse cuidado para não dificultar as coisas criando códigos macarrônicos (eita).
-             * Você está livre para espiar os códigos e entender o seu funcionamento.
-             * Só não vai me bagunçar os códigos pois deu muito trabalho fazer tudo isso aqui =/
-             * */
-            var pessoa = new DAO.PESSOAS();
+            this.ValidaCampos();
 
-            // Parece que faltam algumas coisas aqui! =/
+            
+            if(this.ErrorList.Count > 0)
+            {
+                RetornaErrosAoUsuario();
+                return;
+            }
+               
+            var pessoa = new DAO.PESSOAS()
+            {
+                NOME = this.txtNome.Text,
+                CPF  = this.txtCpf.Text,
+                RG   = this.txtRg.Text,
+                TELEFONE = this.txtTelefone.Text,
+                EMAIL = this.txtEmail.Text,
+                SEXO = this.ddlSexo.SelectedValue,
+                DATA_NASCIMENTO = DataNascimentoConvertida,
+            };
 
-            // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
-            // As pessoas não são objetos mas aqui podemos considerá-las assim =S
-            // - Faça as devidas atribuições ao objeto 'pessoa' para que ela seja uma pessoa de verdade e feliz!
-
-
-            // Verifique os tamanhos dos campos da tabela e a obrigatoriedade deles e faça o devido tratamento para evitar erros.
-            // - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
-
-            // Coloque o seu lindo código aqui! (O_o)
-            this.Gravar(pessoa);
+             this.Gravar(pessoa);
         }
+
+       
 
         /// <summary>
         /// Persistir os dados no Banco.
@@ -63,6 +70,44 @@ namespace EISOL_TestePraticoWebForms
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+        }
+
+        /// <summary>
+        /// Valida os Campos Enviados no Form
+        /// </summary>
+        private void ValidaCampos()
+        {
+
+            this.ErrorList = new List<string>();
+
+            if (this.txtNome.Text == String.Empty) ErrorList.Add("O campo Nome é Obrigatório");
+            if (this.txtCpf.Text == String.Empty) ErrorList.Add("O campo CPF é Obrigatório");
+            if (this.txtRg.Text == String.Empty) ErrorList.Add("O campo RG é Obrigatório");
+            if (this.ddlSexo.SelectedIndex == 0) ErrorList.Add("O campo Sexo é Obrigatório");
+            if (this.txtDataNascimento.Text == String.Empty) ErrorList.Add("O campo Data de Nascimento é Obrigatório");
+
+            if (this.txtNome.Text.Length > 200) ErrorList.Add("O campo Nome deve possuir no máximo 200 caracteres");
+            if (this.txtCpf.Text.Length != 11) ErrorList.Add("O campo CPF deve possuir 11 Digitos");
+            if (this.txtRg.Text.Length > 15) ErrorList.Add("O campo RG deve possuir no máximo 15 caracteres");
+            if (this.txtTelefone.Text.Length > 20) ErrorList.Add("O campo Telefone deve possuir no máximo 20 caracteres");
+            if (this.txtEmail.Text.Length > 200) ErrorList.Add("O Campo e-mail deve possuir no Maximo 200 caracteres");
+
+            if (!DateTime.TryParseExact(this.txtDataNascimento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out DataNascimentoConvertida))
+                ErrorList.Add("O campo Data de Nascimento está em formato inválido");
+        }
+
+        ///<summary>
+        /// Retorna FeedBack Visual para o Usuário
+        /// </summary>
+        private void RetornaErrosAoUsuario()
+        {
+            
+            var retorno = String.Empty;
+            foreach(var erro in this.ErrorList)
+                retorno += String.Format("<p class='danger-text'>{0}</p>", erro.ToString());
+           
+            Response.Write(retorno);
         }
     }
 }
