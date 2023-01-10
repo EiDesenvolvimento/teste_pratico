@@ -45,14 +45,14 @@
                                 UF
                             </label>
                             <%--DICA: Coloque o evento OnSelectedIndexChanged pra esse cara aqui!--%>
-                            <asp:DropDownList ID="ddlUf" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlUf" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlUf_SelectedIndexChanged">
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <label>
                                 Cidade
                             </label>
-                            <asp:DropDownList ID="ddlCidades" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlCidades" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlUf_SelectedIndexChanged">
                             </asp:DropDownList>
                         </div>
                     </div>

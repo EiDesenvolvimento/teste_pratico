@@ -24,6 +24,12 @@ namespace EISOL_TestePraticoWebForms
             // Sinta-se livre para fazer a sua arte, mas tente fazer o formulário funcionar ok!
         }
 
+        public string formatarTamanhoString(string texto, int tamanho)
+        {
+            var resultado = texto.Length > 200 ? texto.Substring(0, tamanho) : texto;
+            return resultado;
+        }
+
         protected void btnGravar_Click(object sender, EventArgs e)
         {
             /* Olá!
@@ -36,7 +42,17 @@ namespace EISOL_TestePraticoWebForms
              * */
 
             var pessoa = new DAO.PESSOAS();
+            pessoa.NOME = formatarTamanhoString(txtNome.Text, 200);
+            pessoa.CPF = txtCpf.Text.Replace(".", "").Replace("-", "");
+            pessoa.RG = txtRg.Text;
+            pessoa.TELEFONE = string.IsNullOrEmpty(txtTelefone.Text) ? null : txtTelefone.Text; // Acho que nulo ocupa menos espaço no banco do que string vazia
+            pessoa.EMAIL = string.IsNullOrEmpty(txtEmail.Text) ? null :
+                formatarTamanhoString(txtEmail.Text, 200);
+            pessoa.SEXO = ddlSexo.Text;
 
+            var dataStringArray = txtDataNascimento.Text.Split('/');
+
+            pessoa.DATA_NASCIMENTO = Convert.ToDateTime($"{dataStringArray[1]}/{dataStringArray[0]}/{dataStringArray[2]}");
             // Parece que faltam algumas coisas aqui! =/
 
             // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
@@ -68,6 +84,7 @@ namespace EISOL_TestePraticoWebForms
         private void Alertar()
         {
             this.divAlerta.Visible = true;
+            Limpar();
         }
 
         /// <summary>
@@ -77,6 +94,14 @@ namespace EISOL_TestePraticoWebForms
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+
+            this.txtNome.Text = "";
+            this.txtCpf.Text = "";
+            this.txtRg.Text = "";
+            this.txtTelefone.Text = "";
+            this.txtEmail.Text = "";
+            this.ddlSexo.Text = "";
+            this.txtDataNascimento.Text = "";
         }
     }
 }

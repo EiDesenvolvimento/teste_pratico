@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace EISOL_TestePraticoWebForms
 {
@@ -27,6 +28,17 @@ namespace EISOL_TestePraticoWebForms
             // Povoando as Cidades
             this.ddlCidades.Items.Clear();
             this.ddlCidades.DataSource = new BLL.CIDADES().CarregarTodos();
+            this.ddlCidades.DataTextField = "NOME";
+            this.ddlCidades.DataValueField = "COD_CIDADE";
+            this.ddlCidades.DataBind();
+        }
+
+        protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Filtrando as Cidades
+            var intUf = Convert.ToInt16(ddlUf.Text);
+            this.ddlCidades.Items.Clear();
+            this.ddlCidades.DataSource = new BLL.CIDADES().CarregarTodos().Where(x=>x.COD_UF == intUf);
             this.ddlCidades.DataTextField = "NOME";
             this.ddlCidades.DataValueField = "COD_CIDADE";
             this.ddlCidades.DataBind();

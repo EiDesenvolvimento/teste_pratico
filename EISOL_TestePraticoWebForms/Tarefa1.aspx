@@ -54,19 +54,19 @@
                             <label>
                                 Nome
                             </label>
-                            <asp:TextBox ID="txtNome" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
                                 CPF
                             </label>
-                            <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
                                 RG
                             </label>
-                            <asp:TextBox ID="txtRg" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtRg" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
@@ -86,8 +86,8 @@
                             <label>
                                 Sexo
                             </label>
-                            <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-control">
-                                <asp:ListItem>[Selecione]</asp:ListItem>
+                            <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-control" required="required">
+                                <asp:ListItem Value="">[Selecione]</asp:ListItem>
                                 <asp:ListItem Value="M">Masculino</asp:ListItem>
                                 <asp:ListItem Value="F">Feminino</asp:ListItem>
                             </asp:DropDownList>
@@ -96,7 +96,7 @@
                             <label>
                                 Data de nascimento
                             </label>
-                            <asp:TextBox ID="txtDataNascimento" runat="server" CssClass="form-control" placeholder="DD/MM/YYYY"></asp:TextBox>
+                            <asp:TextBox ID="txtDataNascimento" runat="server" CssClass="form-control" placeholder="DD/MM/YYYY" textmode="Date" required="required"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="btnGravar_Click" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
     </div>
@@ -117,4 +117,13 @@
             <strong>Muito Bom!</strong> Você conseguiu salvar os dados no banco de dados... será? Vou verificar isso depois :p.
         </div>
     </div>
+
+    <script src="Scripts/jquery.mask.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#<%= txtCpf.ClientID %>").mask("999.999.999-99");
+            $("#<%= txtRg.ClientID %>").mask("999.999.999");
+            $("#<%= txtTelefone.ClientID %>").mask("(99) 9999-9999");
+        });
+    </script>
 </asp:Content>

@@ -11,6 +11,12 @@ namespace EISOL_TestePraticoWebForms
             // Sinta-se livre para fazer a sua arte, mas tente fazer o formulário funcionar ok!
         }
 
+        public string formatarTamanhoString(string texto, int tamanho)
+        {
+            var resultado = texto.Length > 200 ? texto.Substring(0, tamanho) : texto;
+            return resultado;
+        }
+
         protected void btnGravar_Click(object sender, EventArgs e)
         {
             /* Olá!
@@ -21,8 +27,16 @@ namespace EISOL_TestePraticoWebForms
              * Você está livre para espiar os códigos e entender o seu funcionamento.
              * Só não vai me bagunçar os códigos pois deu muito trabalho fazer tudo isso aqui =/
              * */
-            var pessoa = new DAO.PESSOAS();
 
+            var pessoa = new DAO.PESSOAS();
+            pessoa.NOME = formatarTamanhoString(txtNome.Text, 200);
+            pessoa.CPF = txtCpf.Text.Replace(".", "").Replace("-", "");
+            pessoa.RG = txtRg.Text;
+            pessoa.TELEFONE = string.IsNullOrEmpty(txtTelefone.Text) ? null : txtTelefone.Text; // Acho que nulo ocupa menos espaço no banco do que string vazia
+            pessoa.EMAIL = string.IsNullOrEmpty(txtEmail.Text) ? null :
+                formatarTamanhoString(txtEmail.Text, 200);
+            pessoa.SEXO = ddlSexo.Text;
+            pessoa.DATA_NASCIMENTO = Convert.ToDateTime(txtDataNascimento.Text);
             // Parece que faltam algumas coisas aqui! =/
 
             // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
@@ -42,7 +56,7 @@ namespace EISOL_TestePraticoWebForms
         /// </summary>
         /// <param name="pessoa">DAO.PESSOAS</param>
         private void Gravar(DAO.PESSOAS pessoa)
-        {                        
+        {
             // Se a pessoa for uma pessoa de verdade e feliz, com certeza ela será lembrada pelo banco de dados.
             new BLL.PESSOAS().Adicionar(pessoa);
             this.Alertar();
@@ -54,6 +68,7 @@ namespace EISOL_TestePraticoWebForms
         private void Alertar()
         {
             this.divAlerta.Visible = true;
+            Limpar();
         }
 
         /// <summary>
@@ -63,6 +78,13 @@ namespace EISOL_TestePraticoWebForms
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+            this.txtNome.Text = "";
+            this.txtCpf.Text = "";
+            this.txtRg.Text = "";
+            this.txtTelefone.Text = "";
+            this.txtEmail.Text = "";
+            this.ddlSexo.Text = "";
+            this.txtDataNascimento.Text = "";
         }
     }
 }
