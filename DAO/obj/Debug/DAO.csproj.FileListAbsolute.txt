@@ -55,3 +55,34 @@ C:\teste\DAO\bin\Debug\System.Text.Encodings.Web.xml
 C:\teste\DAO\bin\Debug\System.Text.Json.xml
 C:\teste\DAO\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\teste\DAO\bin\Debug\System.ValueTuple.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\DAO.dll.config
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\DAO.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\DAO.pdb
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Buffers.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Memory.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Text.Json.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.ValueTuple.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Buffers.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Memory.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Text.Json.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\bin\Debug\System.ValueTuple.xml
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\obj\Debug\DAO.csproj.AssemblyReference.cache
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\obj\Debug\DAO.csproj.CopyComplete
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\obj\Debug\DAO.dll
+C:\Users\JK - Familia\Source\Repos\teste_pratico\DAO\obj\Debug\DAO.pdb
+C:\Users\JK - Familia\source\repos\teste_pratico\DAO\bin\Debug\EntityFramework.dll
+C:\Users\JK - Familia\source\repos\teste_pratico\DAO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\JK - Familia\source\repos\teste_pratico\DAO\bin\Debug\EntityFramework.xml
+C:\Users\JK - Familia\source\repos\teste_pratico\DAO\bin\Debug\EntityFramework.SqlServer.xml
