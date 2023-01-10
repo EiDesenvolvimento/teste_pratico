@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace EISOL_TestePraticoWebForms
 {
@@ -28,7 +29,13 @@ namespace EISOL_TestePraticoWebForms
             // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
             // As pessoas não são objetos mas aqui podemos considerá-las assim =S
             // - Faça as devidas atribuições ao objeto 'pessoa' para que ela seja uma pessoa de verdade e feliz!
-
+            pessoa.NOME = txtNome.Text;
+            pessoa.CPF = txtCpf.Text;
+            pessoa.EMAIL = txtEmail.Text;
+            pessoa.SEXO = ddlSexo.SelectedValue;
+            pessoa.RG = txtRg.Text;
+            pessoa.TELEFONE = txtTelefone.Text;
+            pessoa.DATA_NASCIMENTO = DateTime.ParseExact(txtDataNascimento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             // Verifique os tamanhos dos campos da tabela e a obrigatoriedade deles e faça o devido tratamento para evitar erros.
             // - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
@@ -48,6 +55,12 @@ namespace EISOL_TestePraticoWebForms
             this.Alertar();
         }
 
+        protected void BtnLimpar_Click(object sender, EventArgs e)
+        {
+            this.AlertarLímpar();
+            this.Limpar();
+        }
+
         /// <summary>
         /// Apresentar o alerta de sucesso na operação.
         /// </summary>
@@ -57,12 +70,27 @@ namespace EISOL_TestePraticoWebForms
         }
 
         /// <summary>
+        /// Apresentar o alerta de sucesso na operação.
+        /// </summary>
+        private void AlertarLímpar()
+        {
+            this.divAlertaLimpar.Visible = true;
+        }
+
+        /// <summary>
         /// Limpar os campos após a presistência dos dados.
         /// </summary>
         private void Limpar()
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+            txtNome.Text = String.Empty;
+            txtCpf.Text = String.Empty;
+            txtDataNascimento.Text = String.Empty;
+            txtEmail.Text = String.Empty;
+            txtRg.Text = String.Empty;
+            txtTelefone.Text = String.Empty;
+            ddlSexo.SelectedIndex = 0;    
         }
     }
 }
