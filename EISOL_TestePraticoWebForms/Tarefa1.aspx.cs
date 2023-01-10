@@ -24,13 +24,12 @@ namespace EISOL_TestePraticoWebForms
 
             var pessoa = new DAO.PESSOAS();
             pessoa.NOME = txtNome.Text;
-            pessoa.CPF = txtCpf.Text;
+            pessoa.CPF = txtCpf.Text.Replace(".","").Replace("-","");
             pessoa.RG = txtRg.Text;
-            pessoa.TELEFONE = txtTelefone.Text;
-            pessoa.EMAIL = txtEmail.Text;
+            pessoa.TELEFONE = string.IsNullOrEmpty(txtTelefone.Text) ? null : txtTelefone.Text;
+            pessoa.EMAIL = string.IsNullOrEmpty(txtEmail.Text) ? null : txtEmail.Text;
             pessoa.SEXO = ddlSexo.Text;
-            var dataArray = txtDataNascimento.Text.Split('/');
-            pessoa.DATA_NASCIMENTO = Convert.ToDateTime($"{dataArray[1]}/{dataArray[0]}/{dataArray[2]}");
+            pessoa.DATA_NASCIMENTO = Convert.ToDateTime(txtDataNascimento.Text);
             // Parece que faltam algumas coisas aqui! =/
 
             // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
@@ -50,7 +49,7 @@ namespace EISOL_TestePraticoWebForms
         /// </summary>
         /// <param name="pessoa">DAO.PESSOAS</param>
         private void Gravar(DAO.PESSOAS pessoa)
-        {                        
+        {
             // Se a pessoa for uma pessoa de verdade e feliz, com certeza ela será lembrada pelo banco de dados.
             new BLL.PESSOAS().Adicionar(pessoa);
             this.Alertar();
