@@ -121,7 +121,6 @@
     <script src="Scripts/jquery.mask.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            //$("#<%= txtDataNascimento.ClientID %>").mask("99/99/9999");
             $("#<%= txtCpf.ClientID %>").mask("999.999.999-99");
             $("#<%= txtRg.ClientID %>").mask("999.999.999");
             $("#<%= txtTelefone.ClientID %>").mask("(99) 9999-9999");

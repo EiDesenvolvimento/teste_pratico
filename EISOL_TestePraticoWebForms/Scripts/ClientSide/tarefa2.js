@@ -11,6 +11,7 @@ var TAREFA2 = TAREFA2 || {
         $("[id$='_btnEstranho']").on('click', () => {
             return TAREFA2.Autodestruir();
         });
+
     },
     Autodestruir: () => {
         window.alert('Este computador se autodestruirá em 20 segundos...\r\nTodos os seus códigos serão descartados e não poderão ser recuperados.');
@@ -29,6 +30,8 @@ var postBackPage = postBackPage || Sys.WebForms.PageRequestManager.getInstance()
 
 $(document).ready(function () {
     TAREFA2.Carregar();
+    $("[id$='_txtCpf']").mask("999.999.999-99");
+
 });
 
 postBackPage.add_endRequest(function () {
