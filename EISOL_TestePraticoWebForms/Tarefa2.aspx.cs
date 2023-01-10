@@ -84,6 +84,7 @@ namespace EISOL_TestePraticoWebForms
         private void Alertar()
         {
             this.divAlerta.Visible = true;
+            Limpar();
         }
 
         /// <summary>
@@ -93,6 +94,14 @@ namespace EISOL_TestePraticoWebForms
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+
+            this.txtNome.Text = "";
+            this.txtCpf.Text = "";
+            this.txtRg.Text = "";
+            this.txtTelefone.Text = "";
+            this.txtEmail.Text = "";
+            this.ddlSexo.Text = "";
+            this.txtDataNascimento.Text = "";
         }
     }
 }

@@ -30,11 +30,11 @@ namespace EISOL_TestePraticoWebForms
 
             var pessoa = new DAO.PESSOAS();
             pessoa.NOME = formatarTamanhoString(txtNome.Text, 200);
-            pessoa.CPF = txtCpf.Text.Replace(".","").Replace("-","");
+            pessoa.CPF = txtCpf.Text.Replace(".", "").Replace("-", "");
             pessoa.RG = txtRg.Text;
             pessoa.TELEFONE = string.IsNullOrEmpty(txtTelefone.Text) ? null : txtTelefone.Text; // Acho que nulo ocupa menos espaço no banco do que string vazia
-            pessoa.EMAIL = string.IsNullOrEmpty(txtEmail.Text) ? null : 
-                formatarTamanhoString(txtEmail.Text,200);
+            pessoa.EMAIL = string.IsNullOrEmpty(txtEmail.Text) ? null :
+                formatarTamanhoString(txtEmail.Text, 200);
             pessoa.SEXO = ddlSexo.Text;
             pessoa.DATA_NASCIMENTO = Convert.ToDateTime(txtDataNascimento.Text);
             // Parece que faltam algumas coisas aqui! =/
@@ -68,6 +68,7 @@ namespace EISOL_TestePraticoWebForms
         private void Alertar()
         {
             this.divAlerta.Visible = true;
+            Limpar();
         }
 
         /// <summary>
@@ -77,6 +78,13 @@ namespace EISOL_TestePraticoWebForms
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+            this.txtNome.Text = "";
+            this.txtCpf.Text = "";
+            this.txtRg.Text = "";
+            this.txtTelefone.Text = "";
+            this.txtEmail.Text = "";
+            this.ddlSexo.Text = "";
+            this.txtDataNascimento.Text = "";
         }
     }
 }

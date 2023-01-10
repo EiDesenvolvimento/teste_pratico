@@ -47,9 +47,11 @@ $(document).ready(function () {
 
 
     $("[id$='_txtEmail']").on("blur", (e) => {
-        if (!emailValido(e.target.value)) {
-            alert("Email digitado é inválido! Digite novamente.")
-            $("[id$='_txtEmail']").val("");
+        if (e.target.value != "") {
+            if (!emailValido(e.target.value)) {
+                alert("Email digitado é inválido! Digite novamente.")
+                $("[id$='_txtEmail']").val("");
+            }
         }
     });
 });
