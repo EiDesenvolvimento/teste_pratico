@@ -30,10 +30,41 @@ var postBackPage = postBackPage || Sys.WebForms.PageRequestManager.getInstance()
 
 $(document).ready(function () {
     TAREFA2.Carregar();
-    $("[id$='_txtCpf']").mask("999.999.999-99");
+    $("[id$='_txtNome']").prop('required', true);
 
+    $("[id$='_txtCpf']").mask("999.999.999-99");
+    $("[id$='_txtCpf']").prop('required', true);
+
+    $("[id$='_txtRg']").mask("999.999.999");
+    $("[id$='_txtRg']").prop('required', true);
+
+    $("[id$='_txtTelefone']").mask("(99) 9999-9999");
+
+    $("[id$='_txtDataNascimento']").mask("99/99/9999");
+    $("[id$='_txtDataNascimento']").prop('required', true);
+
+    $("[id$='_ddlSexo']").prop('required', true);
+
+
+    $("[id$='_txtEmail']").on("blur", (e) => {
+        if (!emailValido(e.target.value)) {
+            alert("Email digitado é inválido! Digite novamente.")
+            $("[id$='_txtEmail']").val("");
+        }
+    });
 });
 
 postBackPage.add_endRequest(function () {
     TAREFA2.Carregar();
 });
+
+function emailValido(email) {
+    var regex =
+        /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!regex.test(email)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}

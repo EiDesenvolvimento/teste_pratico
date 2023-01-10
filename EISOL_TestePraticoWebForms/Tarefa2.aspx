@@ -98,7 +98,7 @@
                                 Sexo
                             </label>
                             <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-control">
-                                <asp:ListItem>[Selecione]</asp:ListItem>
+                                <asp:ListItem Value="">[Selecione]</asp:ListItem>
                                 <asp:ListItem Value="M">Masculino</asp:ListItem>
                                 <asp:ListItem Value="F">Feminino</asp:ListItem>
                             </asp:DropDownList>
@@ -117,7 +117,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="btnGravar_Click"/>
             <asp:Button ID="btnEstranho" runat="server" Text="Não clique aqui!" CssClass="btn btn-danger" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
@@ -132,5 +132,6 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ScriptContent" runat="server">
+    <script src="Scripts/jquery.mask.js"></script>    
     <script src="Scripts/ClientSide/tarefa2.js"></script>
 </asp:Content>
