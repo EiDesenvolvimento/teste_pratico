@@ -24,7 +24,7 @@ namespace EISOL_TestePraticoWebForms
         {
             // Para saber se o seu registro foi realmente adicionado à tabela, utilize um dos métodos de BLL.PESSOAS.
             // Você poderá realizar a depuração aqui no VS e conferir se tudo deu certo.
-            // Sinta-se livre para fazer a sua arte, mas tente fazer o formulário funcionar ok!
+            // Sinta-se livre para fazer a sua arte, mas tente fazer o formulário funcionar ok! 
             this.txtNome.MaxLength = 200;
             this.txtCpf.MaxLength = 11;
             this.txtRg.MaxLength = 15;
