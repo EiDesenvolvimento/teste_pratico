@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace EISOL_TestePraticoWebForms
 {
@@ -22,6 +25,22 @@ namespace EISOL_TestePraticoWebForms
             // Para saber se o seu registro foi realmente adicionado à tabela, utilize um dos métodos de BLL.PESSOAS.
             // Você poderá realizar a depuração aqui no VS e conferir se tudo deu certo.
             // Sinta-se livre para fazer a sua arte, mas tente fazer o formulário funcionar ok!
+            this.txtNome.MaxLength = 200;
+            this.txtCpf.MaxLength = 11;
+            this.txtRg.MaxLength = 15;
+            this.txtTelefone.MaxLength = 20;
+            this.txtEmail.MaxLength = 200;
+            this.txtDataNascimento.MaxLength = 10;
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("<script type=\"text/javascript\" src=\"").Append("Scripts/jquery-1.4.1.js").Append("\"></script>");
+            sb.Append("<script type=\"text/javascript\">");
+            sb.Append("$('#txtCpf').mask('999.999.999-99', { placeholder: '___.___.___-__' });");
+            sb.Append("$('#txtTelefone').mask('(99) 9999-9999', { placeholder: '(__) ____-____' });");
+            sb.Append("$('#txtDataNascimento').mask('99/99/9999', { placeholder: '__/__/____' });");
+            sb.Append("</script>");
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", sb.ToString(), true);
         }
 
         protected void btnGravar_Click(object sender, EventArgs e)
@@ -47,6 +66,22 @@ namespace EISOL_TestePraticoWebForms
             // - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
 
             // Coloque o seu lindo código aqui! (O_o)
+            String msgErroRet = this.ValidarCamposFormulario();
+
+            /*if (msgErroRet != "")
+            {
+                this.msgErro.Text += " " + msgErroRet;
+                this.msgErro.Visible = true;
+                return;
+            }*/
+
+            pessoa.NOME = this.txtNome.Text;
+            pessoa.CPF = this.txtCpf.Text;
+            pessoa.RG = this.txtRg.Text;
+            pessoa.TELEFONE = this.txtTelefone.Text;
+            pessoa.EMAIL = this.txtEmail.Text;
+            pessoa.SEXO = this.ddlSexo.Text;
+            pessoa.DATA_NASCIMENTO = DateTime.Parse(this.txtDataNascimento.Text);
 
             this.Gravar(pessoa);
         }
@@ -60,6 +95,8 @@ namespace EISOL_TestePraticoWebForms
             // Se a pessoa for uma pessoa de verdade e feliz, com certeza ela será lembrada pelo banco de dados.
             new BLL.PESSOAS().Adicionar(pessoa);
             this.Alertar();
+
+            Limpar();
         }
 
         /// <summary>
@@ -77,6 +114,51 @@ namespace EISOL_TestePraticoWebForms
         {
             // Isso é apenas um bônus!
             // Tente fazê-lo e colocar em um lugar apropriado no código.
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is TextBox)
+                {
+                    ((TextBox)ctrl).Text = "";
+                }
+                else if (ctrl is DropDownList)
+                {
+                    ((DropDownList)ctrl).SelectedIndex = -1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validação dos campos do Formulário
+        /// </summary>
+        public String ValidarCamposFormulario()
+        {
+            if (this.txtNome.Text == "")
+            {
+                return "Favor informar o nome!";
+            }
+            else if (this.txtCpf.Text == "")
+            {
+                return "Favor informar o CPF!";
+            }
+            else if (this.txtRg.Text == "")
+            {
+                return "Favor informar o RG!";
+            }
+            else if (this.txtDataNascimento.Text == "")
+            {
+                return "Favor informar a Data de Nascimento!";
+            }
+            else if (this.ddlSexo.Text == "[Selecione]")
+            {
+                return "Favor informar o Sexo!";
+            }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(this.txtEmail.Text, 
+                        "^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$"))
+            {
+                return "Email inválido!";
+            }
+
+            return null;
         }
     }
 }
