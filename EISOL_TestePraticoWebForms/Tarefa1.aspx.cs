@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace EISOL_TestePraticoWebForms
 {
@@ -21,20 +24,22 @@ namespace EISOL_TestePraticoWebForms
              * Você está livre para espiar os códigos e entender o seu funcionamento.
              * Só não vai me bagunçar os códigos pois deu muito trabalho fazer tudo isso aqui =/
              * */
-            var pessoa = new DAO.PESSOAS();
 
-            // Parece que faltam algumas coisas aqui! =/
+            if (ValidaCampos())
+            {
+                var pessoa = new DAO.PESSOAS
+                {
+                    NOME = txtNome.Text,
+                    CPF = txtCpf.Text,
+                    RG = txtRg.Text,
+                    TELEFONE = txtTelefone.Text,
+                    EMAIL = txtEmail.Text,
+                    SEXO = ddlSexo.SelectedValue,
+                    DATA_NASCIMENTO = Convert.ToDateTime(txtDataNascimento.Text)
+                };
 
-            // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
-            // As pessoas não são objetos mas aqui podemos considerá-las assim =S
-            // - Faça as devidas atribuições ao objeto 'pessoa' para que ela seja uma pessoa de verdade e feliz!
-
-
-            // Verifique os tamanhos dos campos da tabela e a obrigatoriedade deles e faça o devido tratamento para evitar erros.
-            // - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
-
-            // Coloque o seu lindo código aqui! (O_o)
-            this.Gravar(pessoa);
+                this.Gravar(pessoa);
+            }
         }
 
         /// <summary>
@@ -46,6 +51,7 @@ namespace EISOL_TestePraticoWebForms
             // Se a pessoa for uma pessoa de verdade e feliz, com certeza ela será lembrada pelo banco de dados.
             new BLL.PESSOAS().Adicionar(pessoa);
             this.Alertar();
+            this.Limpar();
         }
 
         /// <summary>
@@ -61,8 +67,53 @@ namespace EISOL_TestePraticoWebForms
         /// </summary>
         private void Limpar()
         {
-            // Isso é apenas um bônus!
-            // Tente fazê-lo e colocar em um lugar apropriado no código.
+            txtNome.Text = string.Empty;
+            txtCpf.Text = string.Empty;
+            txtRg.Text = string.Empty;
+            txtTelefone.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            ddlSexo.SelectedIndex = 0;
+            txtDataNascimento.Text = string.Empty;
+        }
+
+        private bool ValidaCampos()
+        {
+            bool validaCampos = true;
+
+            if (txtNome.Text.Length == 0 || txtNome.Text.IsNullOrWhiteSpace())
+            {
+                msgErro.Text = "O campo Nome é obrigatório!";
+                validaCampos = false;
+            }
+            else if (txtCpf.Text.Length == 0 || txtCpf.Text.IsNullOrWhiteSpace())
+            {
+                msgErro.Text = "O campo CPF é obrigatório!";
+                validaCampos = false;
+            }
+            else if (txtRg.Text.Length == 0 || txtRg.Text.IsNullOrWhiteSpace())
+            {
+                msgErro.Text = "O campo RG é obrigatório!";
+                validaCampos = false;
+            }
+            else if (ddlSexo.SelectedIndex == 0)
+            {
+                msgErro.Text = "O campo Sexo é obrigatório!";
+                validaCampos = false;
+            }
+            else if (txtDataNascimento.Text.Length == 0 || ddlSexo.Text.IsNullOrWhiteSpace())
+            {
+                msgErro.Text = "O campo Data de nascimento é obrigatório!";
+                validaCampos = false;
+            }
+
+            if (!validaCampos)
+            {
+                msgErro.Visible = true;
+                return false;
+            }
+
+            msgErro.Visible = false;
+            return true;
         }
     }
 }

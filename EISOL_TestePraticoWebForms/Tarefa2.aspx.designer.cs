@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EISOL_TestePraticoWebForms {
-    
-    
-    public partial class Tarefa2 {
-        
+namespace EISOL_TestePraticoWebForms
+{
+
+
+    public partial class Tarefa2
+    {
+
         /// <summary>
         /// txtNome control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNome;
-        
+
         /// <summary>
         /// txtCpf control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCpf;
-        
+
         /// <summary>
         /// txtRg control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRg;
-        
+
         /// <summary>
         /// txtTelefone control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefone;
-        
+
         /// <summary>
         /// txtEmail control.
         /// </summary>
@@ -56,7 +58,16 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        
+
+        /// <summary>
+        /// validatorEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validatorEmail;
+
         /// <summary>
         /// ddlSexo control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSexo;
-        
+
         /// <summary>
         /// txtDataNascimento control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDataNascimento;
-        
+
         /// <summary>
         /// btnGravar control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGravar;
-        
+
         /// <summary>
         /// btnEstranho control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace EISOL_TestePraticoWebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEstranho;
-        
+
         /// <summary>
         /// divAlerta control.
         /// </summary>
