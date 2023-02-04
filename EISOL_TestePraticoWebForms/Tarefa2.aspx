@@ -68,7 +68,7 @@
                             <label>
                                 CPF
                             </label>
-                             <%--Colocar máscara de CPF aqui será um bônus--%>
+                             <%--Colocar máscara de CPF aqui será um bônus / Máscara no arquivo tareja2.js--%>
                             <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
@@ -81,7 +81,7 @@
                             <label>
                                 Telefone
                             </label>
-                            <%--Colocar máscara de telefone aqui será um bônus--%>
+                            <%--Colocar máscara de telefone aqui será um bônus / Máscara no arquivo tareja2.js--%>
                             <asp:TextBox ID="txtTelefone" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
@@ -91,7 +91,10 @@
                                 Email
                             </label>
                             <%--Colocar expressão regular pra validar email aqui será um bônus plus 2.0 Ultimate Edition Deluxe Ultra Master Blaster --%>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="validatorEmail" runat="server" ControlToValidate="txtEmail"   
+                                ErrorMessage="E-mail inválido" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">  
+                            </asp:RegularExpressionValidator>  
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             <label>
@@ -107,7 +110,7 @@
                             <label>
                                 Data de nascimento
                             </label>
-                            <%--Colocar máscara de data aqui será um bônus--%>
+                            <%--Colocar máscara de data aqui será um bônus  / Máscara no arquivo tareja2.js--%>
                             <asp:TextBox ID="txtDataNascimento" runat="server" CssClass="form-control" placeholder="DD/MM/YYYY"></asp:TextBox>
                         </div>
                     </div>
@@ -117,7 +120,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="btnGravar_Click" />
             <asp:Button ID="btnEstranho" runat="server" Text="Não clique aqui!" CssClass="btn btn-danger" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
@@ -133,4 +136,5 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ScriptContent" runat="server">
     <script src="Scripts/ClientSide/tarefa2.js"></script>
+    <script src="Scripts/jquery.maskedinput.min.js" type="text/javascript"></script>
 </asp:Content>
