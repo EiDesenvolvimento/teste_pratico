@@ -24,15 +24,24 @@ namespace EISOL_TestePraticoWebForms
             this.ddlUf.DataValueField = "COD_UF";
             this.ddlUf.DataBind();
 
+            var uf = Convert.ToDecimal(ddlUf.SelectedValue);
+            CarregarCidades(uf);
+        }
+
+        protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var uf = Convert.ToDecimal(ddlUf.SelectedValue);
+            CarregarCidades(uf);
+        }
+
+        private void CarregarCidades(decimal codigoUF)
+        {
             // Povoando as Cidades
             this.ddlCidades.Items.Clear();
-            this.ddlCidades.DataSource = new BLL.CIDADES().CarregarTodos();
+            this.ddlCidades.DataSource = new BLL.CIDADES().CarregarPorUF(codigoUF);
             this.ddlCidades.DataTextField = "NOME";
             this.ddlCidades.DataValueField = "COD_CIDADE";
             this.ddlCidades.DataBind();
         }
-
-        // Cadê o evento?
-        // É isso que você deve fazer para finalizar essa tarefa!
     }
 }
