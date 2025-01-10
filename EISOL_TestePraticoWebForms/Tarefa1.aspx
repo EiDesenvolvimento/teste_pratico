@@ -45,9 +45,6 @@
                 <div class="ibox-title">
                     <h5>Seus dados</h5>
                 </div>
-                <div>
-                    <asp:Label runat="server" CssClass="form-control" ID="msgErro" Visible="false">Erro, verifique o Campo: </asp:Label>
-                </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -90,6 +87,7 @@
                                 <asp:ListItem>[Selecione]</asp:ListItem>
                                 <asp:ListItem Value="M">Masculino</asp:ListItem>
                                 <asp:ListItem Value="F">Feminino</asp:ListItem>
+                                <asp:ListItem Value="O">Outro</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -103,9 +101,14 @@
             </div>
         </div>
     </div>
+    <div class ="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <asp:Label runat="server" CssClass="text-danger" ID="msgErro" Visible="false"></asp:Label>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="BtnGravar_Click" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
     </div>

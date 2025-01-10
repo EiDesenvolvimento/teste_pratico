@@ -69,7 +69,8 @@
                                 CPF
                             </label>
                              <%--Colocar máscara de CPF aqui será um bônus--%>
-                            <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control"></asp:TextBox>
+                           <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control" onkeyup="mascaraCpf(this)" />
+                            <asp:Label runat="server" CssClass="text-danger" ID="msgErroCpf" Visible="false"></asp:Label>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
@@ -82,7 +83,8 @@
                                 Telefone
                             </label>
                             <%--Colocar máscara de telefone aqui será um bônus--%>
-                            <asp:TextBox ID="txtTelefone" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtTelefone" runat="server" CssClass="form-control" onkeyup="mascaraTelefone(this)" />
+                            <asp:Label runat="server" CssClass="text-danger" ID="msgErroTel" Visible="false"></asp:Label>
                         </div>
                     </div>
                     <div class="row">
@@ -91,7 +93,8 @@
                                 Email
                             </label>
                             <%--Colocar expressão regular pra validar email aqui será um bônus plus 2.0 Ultimate Edition Deluxe Ultra Master Blaster --%>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+                            <asp:Label runat="server" CssClass="text-danger" ID="msgErroEmail" Visible="false"></asp:Label>
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             <label>
@@ -108,16 +111,22 @@
                                 Data de nascimento
                             </label>
                             <%--Colocar máscara de data aqui será um bônus--%>
-                            <asp:TextBox ID="txtDataNascimento" runat="server" CssClass="form-control" placeholder="DD/MM/YYYY"></asp:TextBox>
+                             <asp:TextBox ID="txtDataNascimento" runat="server" CssClass="form-control" onkeyup="mascaraData(this)" />
+                            <asp:Label runat="server" CssClass="text-danger" ID="msgErroData" Visible="false"></asp:Label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class ="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <asp:Label runat="server" CssClass="text-danger" ID="msgErro" Visible="false"></asp:Label>
+    </div>
+</div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="BtnGravar_Click" />
             <asp:Button ID="btnEstranho" runat="server" Text="Não clique aqui!" CssClass="btn btn-danger" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
