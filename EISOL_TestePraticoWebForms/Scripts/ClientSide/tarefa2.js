@@ -23,6 +23,51 @@ var TAREFA2 = TAREFA2 || {
         // hummmm...
     }
 }
+function mascaraCpf(campo) {
+    var valor = campo.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+    if (valor.length <= 11) {
+        valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+        valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    }
+
+    campo.value = valor;
+}
+
+
+function mascaraTelefone(campo) {
+    var valor = campo.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+    if (valor.length <= 11) {
+        valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+        valor = valor.replace(/(\d{5})(\d{1,4})$/, "$1-$2");
+    }
+
+    campo.value = valor;
+}
+
+
+function mascaraData(campo) {
+    var valor = campo.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+    // Verifica se o valor tem pelo menos 2 dígitos para o dia
+    if (valor.length <= 2) {
+        campo.value = valor.replace(/(\d{2})/, "$1"); // Aplica apenas o formato do dia
+    }
+    // Se o valor tiver entre 3 e 4 caracteres, adiciona a barra para o mês
+    else if (valor.length > 2 && valor.length <= 4) {
+        campo.value = valor.replace(/(\d{2})(\d{2})/, "$1/$2"); // Aplica a barra no mês
+    }
+    // Se o valor tiver entre 5 e 8 caracteres, adiciona a barra para o ano
+    else if (valor.length > 4) {
+        campo.value = valor.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3"); // Aplica a barra no ano
+    }
+}
+
+
+
+
 
 // Isso aqui são coisas que usamos pra fazer os scripts funcionarem bem com o WebForms
 // Pode ser que você tenha um código muito melhor!
