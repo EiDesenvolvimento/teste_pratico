@@ -11,10 +11,10 @@
             </div>
             <div class="panel-body">
                 <p>
-                    Os controles WebForms possuem a característica dos enventos. Os controles abaixo já são devidamente povoados, mas ainda não funcionam em cascata.
+                    Os controles WebForms possuem a característica dos eventos. Os controles abaixo já são devidamente povoados, mas ainda não funcionam em cascata.
                 </p>
                 <p>
-                    Faça com que ao selecionar a UF, apenas as cidades correspondente àquela UF sejam apresentadas!                
+                    Faça com que ao selecionar a UF, apenas as cidades correspondentes àquela UF sejam apresentadas!                
                 </p>
                 <p>
                     Entre no código fonte pelo Visual Studio e invoque as forças do Leviatã para realizar a cascata perfeita.
@@ -22,10 +22,6 @@
             </div>
         </div>
     </div>
-
-    <%--    
-        Identifique o que faltam nesses controles aqui no HTML e depois verifique o code behind.
-    --%>
 
     <div class="row">
         <div class="col-md-12">
@@ -44,8 +40,12 @@
                             <label>
                                 UF
                             </label>
-                            <%--DICA: Coloque o evento OnSelectedIndexChanged pra esse cara aqui!--%>
-                            <asp:DropDownList ID="ddlUf" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlUf" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlUf_SelectedIndexChanged" AutoPostBack="true">
+                                <asp:ListItem Value="0">Selecione a UF</asp:ListItem>
+                                <asp:ListItem Value="SP">São Paulo</asp:ListItem>
+                                <asp:ListItem Value="RJ">Rio de Janeiro</asp:ListItem>
+                                <asp:ListItem Value="MG">Minas Gerais</asp:ListItem>
+                                <asp:ListItem Value="BA">Bahia</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -65,7 +65,4 @@
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
     </div>
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ScriptContent" runat="server">
 </asp:Content>
