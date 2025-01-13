@@ -13,6 +13,13 @@ namespace EISOL_TestePraticoWebForms
 
 		protected void btnGravar_Click(object sender, EventArgs e)
 		{
+			string nome = txtNome.Text;
+            string cpf = txtCpf.Text;
+            string rg = txtRg.Text;
+            string telefone = txtTelefone.Text;
+            string email = txtEmail.Text;
+            string sexo = ddlSexo.SelectedValue;
+            string dataNascimento = txtDataNascimento.Text;
 			/* Olá!
              * Trabalhamos com camadas de acesso a dados e negócios, isso também é conhecido por arquitetura em camadas ou N-Tier.
              * Observe que passamos um objeto tipado da camada de acesso (DAO - Data Access Object).
@@ -21,7 +28,21 @@ namespace EISOL_TestePraticoWebForms
              * Você está livre para espiar os códigos e entender o seu funcionamento.
              * Só não vai me bagunçar os códigos pois deu muito trabalho fazer tudo isso aqui =/
              * */
-			var pessoa = new DAO.PESSOAS();
+			var pessoa = new DAO.PESSOAS(){
+        		Nome = nome,
+       			Cpf = cpf,
+        		Rg = rg,
+        		Telefone = telefone,
+        		Email = email,
+        		Sexo = sexo,
+        		DataNascimento = DateTime.Parse(dataNascimento) // Convertendo a data
+    		};
+			if (string.IsNullOrWhiteSpace(pessoa.Nome) || string.IsNullOrWhiteSpace(pessoa.Cpf) || string.IsNullOrWhiteSpace(pessoa.Email))
+    		{
+       			 msgErro.Text = "Os campos Nome, CPF e E-mail são obrigatórios!";
+        		 msgErro.Visible = true;
+        	return; // Não continuar se houver campos obrigatórios não preenchidos
+   			}
 
 			// Parece que faltam algumas coisas aqui! =/
 
@@ -65,6 +86,13 @@ namespace EISOL_TestePraticoWebForms
 		/// </summary>
 		private void Limpar()
 		{
+			txtNome.Text = "";
+            txtCpf.Text = "";
+            txtRg.Text = "";
+            txtTelefone.Text = "";
+            txtEmail.Text = "";
+            ddlSexo.SelectedIndex = 0; // [Selecione]
+            txtDataNascimento.Text = "";
 			// Isso é apenas um bônus!
 			// Tente fazê-lo e colocar em um lugar apropriado no código.
 		}
