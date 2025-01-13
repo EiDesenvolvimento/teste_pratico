@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Linq;
 
 namespace EISOL_TestePraticoWebForms
 {
@@ -28,18 +27,18 @@ namespace EISOL_TestePraticoWebForms
                 var results = new List<ValidationResult>();
                 var context = new ValidationContext(pessoa);
 
-                // Verificando validação do Data Annotations
+                // Verificando as validações do DataAnnotations presente na DAO.PESSOAS
                 if (!Validator.TryValidateObject(pessoa, context, results, true))
                 {
                     // Exibe o erro de validação
                     msgErro.Text = results[0].ToString();
                     msgErro.Visible = true;
                     return;
-                }
+                } 
 
                 Gravar(pessoa);
 
-                // Limpar os campos do form após a gravação
+                // Limpandp os campos do form após a gravação
                 Limpar();
             }
             catch (FormatException)
