@@ -32,7 +32,18 @@ namespace EISOL_TestePraticoWebForms
             this.ddlCidades.DataBind();
         }
 
-        // Cadê o evento?
-        // É isso que você deve fazer para finalizar essa tarefa!
+        protected void SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int UFselecionada;
+            if (int.TryParse(ddlUf.SelectedValue, out UFselecionada))
+            {
+                // Filtra as cidades com base na UF selecionada
+                this.ddlCidades.Items.Clear();
+                this.ddlCidades.DataSource = new BLL.CIDADES().CarregarPorUF(UFselecionada);
+                this.ddlCidades.DataTextField = "NOME";
+                this.ddlCidades.DataValueField = "COD_CIDADE";
+                this.ddlCidades.DataBind();
+            }
+        }
     }
 }
