@@ -49,7 +49,7 @@
                                 ID="ddlUf" 
                                 runat="server" 
                                 CssClass="form-control" 
-                                OnSelectedIndexChanged="SelectedIndexChanged"
+                                OnSelectedIndexChanged="ddlUf_SelectedIndexChanged"
                                 AutoPostBack="true"
                                 >
                             </asp:DropDownList>

@@ -32,7 +32,7 @@ namespace EISOL_TestePraticoWebForms
             this.ddlCidades.DataBind();
         }
 
-        protected void SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
         {
             int UFselecionada;
             if (int.TryParse(ddlUf.SelectedValue, out UFselecionada))
