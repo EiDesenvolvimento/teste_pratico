@@ -62,27 +62,27 @@
                             <label>
                                 Nome
                             </label>
-                            <asp:TextBox ID="txtNome" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" placeholder="Digite seu nome completo"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
                                 CPF
                             </label>
-                             <%--Colocar máscara de CPF aqui será um bônus--%>
-                            <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control"></asp:TextBox>
+                            <%--Colocar máscara de CPF aqui será um bônus--%>
+                            <asp:TextBox ID="txtCpf" runat="server" CssClass="form-control" placeholder="000.000.000-00"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
                                 RG
                             </label>
-                            <asp:TextBox ID="txtRg" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtRg" runat="server" CssClass="form-control" placeholder="Digite seu RG"></asp:TextBox>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>
                                 Telefone
                             </label>
                             <%--Colocar máscara de telefone aqui será um bônus--%>
-                            <asp:TextBox ID="txtTelefone" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtTelefone" runat="server" CssClass="form-control" placeholder="(00) 00000-0000"></asp:TextBox>
                         </div>
                     </div>
                     <div class="row">
@@ -91,7 +91,7 @@
                                 Email
                             </label>
                             <%--Colocar expressão regular pra validar email aqui será um bônus plus 2.0 Ultimate Edition Deluxe Ultra Master Blaster --%>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="seuemail@exemplo.com"></asp:TextBox>
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             <label>
@@ -117,7 +117,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClientClick="return TAREFA2.Validar();" />
             <asp:Button ID="btnEstranho" runat="server" Text="Não clique aqui!" CssClass="btn btn-danger" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
@@ -132,5 +132,9 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script src="Scripts/ClientSide/tarefa2.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1.14.16/dist/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js" integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/Scripts/ClientSide/tarefa2.js"></script>
+    
 </asp:Content>
