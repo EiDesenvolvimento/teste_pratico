@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 
 namespace EISOL_TestePraticoWebForms
@@ -44,17 +45,24 @@ namespace EISOL_TestePraticoWebForms
 
             try
             {
-                pessoa.Nome = txtNome.Text.Trim();
-                pessoa.CPF = txtCpf.Text.Trim();
-                pessoa.Email = txtEmail.Text.Trim();
-                pessoa.Telefone = txtTelefone.Text.Trim();
-                pessoa.Sexo = ddlSexo.SelectedValue;
-                pessoa.DataNascimento = DateTime.TryParse(txtDataNascimento.Text, out DateTime data) ? data : (DateTime?)null;
+                pessoa.NOME = txtNome.Text.Trim();
+                pessoa.CPF = Regex.Replace(txtCpf.Text.Trim(), @"[.-]", "");
+                pessoa.EMAIL = txtEmail.Text.Trim();
+                pessoa.TELEFONE = txtTelefone.Text.Trim();
+                pessoa.SEXO = ddlSexo.SelectedValue;
+                pessoa.DATA_NASCIMENTO = DateTime.Parse(txtDataNascimento.Text.Trim());
 
                 // Validação dos campos obrigatórios
-                if (string.IsNullOrWhiteSpace(pessoa.Nome) || string.IsNullOrWhiteSpace(pessoa.CPF) || string.IsNullOrWhiteSpace(pessoa.Email))
+                if (string.IsNullOrWhiteSpace(pessoa.NOME) || string.IsNullOrWhiteSpace(pessoa.CPF) || string.IsNullOrWhiteSpace(pessoa.EMAIL))
                 {
                     msgErro.Text = "Os campos Nome, CPF e Email são obrigatórios preencher!";
+                    msgErro.Visible = true;
+                    return;
+                }
+
+                if (!VerifyIfCpfIsValid(pessoa.CPF))
+                {
+                    msgErro.Text = "O CPF é inválido, verifique os número digitados!";
                     msgErro.Visible = true;
                     return;
                 }
@@ -71,22 +79,39 @@ namespace EISOL_TestePraticoWebForms
 
         }
 
+        private bool VerifyIfCpfIsValid(string cpf)
+        {
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            cpf = cpf.Trim().Replace(".", "").Replace("-", "");
+            if (cpf.Length != 11)
+                return false;
 
+            string tempCpf = cpf.Substring(0, 9);
+            int soma = 0;
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+            int resto = soma % 11;
+            resto = (resto < 2) ? 0 : 11 - resto;
+            tempCpf += resto.ToString();
+
+            soma = 0;
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+            resto = soma % 11;
+            resto = (resto < 2) ? 0 : 11 - resto;
+            tempCpf += resto.ToString();
+
+            return cpf.EndsWith(tempCpf.Substring(9, 2));
+
+        }
 
         /// <summary>
         /// Persistir os dados no Banco.
         /// </summary>
         /// <param name="pessoa">DAO.PESSOAS</param>
-        public class PESSOAS
-        {
-            public string Nome { get; set; }
-            public string CPF { get; set; }
-            public string Telefone { get; set; }
-            public string Email { get; set; }
-            public string Sexo { get; set; }
-            public DateTime DataNascimento { get; set; }
-        }
-
         private void Gravar(DAO.PESSOAS pessoa)
 		{
 			// Se a pessoa for uma pessoa de verdade e feliz, com certeza ela será lembrada pelo banco de dados.
