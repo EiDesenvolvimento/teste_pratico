@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
 namespace EISOL_TestePraticoWebForms
 {
@@ -34,5 +36,35 @@ namespace EISOL_TestePraticoWebForms
 
         // Cadê o evento?
         // É isso que você deve fazer para finalizar essa tarefa!
+        protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string ufSelecionada = ddlUf.SelectedValue; // Obtém a UF selecionada
+            PreencherCidades(ufSelecionada);            // Preenche as cidades correspondentes
+        }
+
+        private void PreencherCidades(string uf)
+        {
+            // Limpa as cidades atuais
+            ddlCidades.Items.Clear();
+            ddlCidades.Items.Add(new ListItem("Selecione a Cidade", ""));
+
+            // Lista de cidades para cada UF (simulação)
+            var cidadesPorUf = new Dictionary<string, List<string>>
+    {
+        { "RJ", new List<string> { "Rio de Janeiro", "Niterói", "Cabo Frio" } },
+        { "SP", new List<string> { "São Paulo", "Campinas", "Santos" } },
+        { "MG", new List<string> { "Belo Horizonte", "Uberlândia", "Ouro Preto" } }
+    };
+
+            // Adiciona as cidades correspondentes à UF selecionada
+            if (cidadesPorUf.ContainsKey(uf))
+            {
+                foreach (var cidade in cidadesPorUf[uf])
+                {
+                    ddlCidades.Items.Add(new ListItem(cidade, cidade));
+                }
+            }
+        }
+
     }
 }

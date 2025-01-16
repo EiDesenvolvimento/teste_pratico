@@ -26,7 +26,9 @@
     <%--    
         Identifique o que faltam nesses controles aqui no HTML e depois verifique o code behind.
     --%>
-
+    <label>
+        UF
+    </label>
     <div class="row">
         <div class="col-md-12">
             <h2>Cascatas de Leviatã</h2>
@@ -45,7 +47,11 @@
                                 UF
                             </label>
                             <%--DICA: Coloque o evento OnSelectedIndexChanged pra esse cara aqui!--%>
-                            <asp:DropDownList ID="ddlUf" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlUf" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlUf_SelectedIndexChanged">
+                                <asp:ListItem Text="Selecione o Estado" Value="" />
+                                <asp:ListItem Text="Rio de Janeiro" Value="RJ" />
+                                <asp:ListItem Text="São Paulo" Value="SP" />
+                                <asp:ListItem Text="Minas Gerais" Value="MG" />
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -53,6 +59,7 @@
                                 Cidade
                             </label>
                             <asp:DropDownList ID="ddlCidades" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="Selecione a Cidade" Value="" />
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -68,4 +75,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ScriptContent" runat="server">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="/Scripts/ClientSide/tarefa3.js"></script>
 </asp:Content>
