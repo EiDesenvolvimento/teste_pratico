@@ -11,6 +11,11 @@ var TAREFA2 = TAREFA2 || {
         $("[id$='_btnEstranho']").on('click', () => {
             return TAREFA2.Autodestruir();
         });
+
+        $('#txtTelefone').inputmask('(00) 00000-0000');
+        $('#txtCpf').inputmask('000.000.000-00');
+        $('#txtDataNascimento').inputmask('00/00/0000');
+
     },
     Autodestruir: () => {
         window.alert('Este computador se autodestruirá em 20 segundos...\r\nTodos os seus códigos serão descartados e não poderão ser recuperados.');
