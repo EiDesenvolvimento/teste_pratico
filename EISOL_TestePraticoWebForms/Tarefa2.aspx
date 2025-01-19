@@ -56,6 +56,7 @@
                 <div class="ibox-title">
                     <h5>Seus dados</h5>
                 </div>
+                <asp:Label runat="server" CssClass="text-danger" ID="msgErro" visible="true"></asp:Label>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -117,7 +118,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" OnClick="btnGravar_Click" />
             <asp:Button ID="btnEstranho" runat="server" Text="Não clique aqui!" CssClass="btn btn-danger" />
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
