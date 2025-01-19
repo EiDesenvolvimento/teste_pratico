@@ -36,9 +36,45 @@ namespace EISOL_TestePraticoWebForms
              * Envie um objeto com dados, passando pela camada de negócios e que possibilite salvar os dados do formulário preenchido no banco de dados.
              */
 
-			// Coloque o seu lindo código aqui! (O_o)
 
-			this.Gravar(pessoa);
+			// Coloque o seu lindo código aqui! (O_o)
+			try
+			{
+				if (ValidarDados(out string mensagemErro))
+				{
+					pessoa.NOME = txtNome.Text;
+					pessoa.CPF = txtCpf.Text;
+					pessoa.RG = txtRg.Text;
+					pessoa.TELEFONE = txtTelefone.Text;
+					pessoa.EMAIL = txtEmail.Text;
+					pessoa.SEXO = ddlSexo.SelectedValue;
+					pessoa.DATA_NASCIMENTO = DateTime.Parse(txtDataNascimento.Text);
+
+					this.Gravar(pessoa);
+				}
+				else
+				{
+					// Exibir mensagem de erro
+					msgErro.Text = mensagemErro;
+				}
+
+
+			}
+			catch (Exception ex)
+			{
+				msgErro.Text = "Houve um erro ao salvar os dados: " + ex.Message;
+				msgErro.Visible = true;
+			}
+
+
+			// - Ao persistir os dados no Banco de Dados, apresenta a seguinte mensagem "Houve um erro ao salvar os dados: A solicitação de conexão sofreu timeout"
+			// - Realizado a validação dos dados ao instânciar Pessoa
+			// - O que precisa ser melhorado: Verificar o erro da persistência de dados no banco, pois não consegui resolver a tempo
+			// - E também criar um Service para realizar a validação do CPF e verificar a data de nascimento
+			// - Ao recompilar o código apresenta o erro: Linha 1:  <%@ Application Codebehind="Global.asax.cs" Inherits="EISOL_TestePraticoWebForms.Global" Language="C#" %>
+			// - Erro no qual consegui resolver, mas segui toda a validação certo, tentei resolver há dias, mas não consegui, deixo
+			// - Em aberto para possíveis melhorias de validação da aplicação
+
 		}
 
 		/// <summary>
@@ -67,6 +103,42 @@ namespace EISOL_TestePraticoWebForms
 		{
 			// Isso é apenas um bônus!
 			// Tente fazê-lo e colocar em um lugar apropriado no código.
+		}
+
+		private bool ValidarDados(out string mensagemErro)
+		{
+			mensagemErro = "";
+
+			if (string.IsNullOrWhiteSpace(txtNome.Text))
+			{
+				mensagemErro = "Nome é obrigatório.";
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(txtCpf.Text))
+			{
+				mensagemErro = "Campo CPF obrigatório.";
+				return false;
+			}
+
+			if (!DateTime.TryParse(txtDataNascimento.Text, out DateTime dataNascimento))
+			{
+				mensagemErro = "Data de nascimento inválida.";
+				return false;
+			}
+			if (dataNascimento > DateTime.Now)
+			{
+				mensagemErro = "Data de nascimento não pode ser no futuro.";
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(txtTelefone.Text))
+			{
+				mensagemErro = "Campo telefone obrigatório.";
+				return false;
+			}
+
+			return true;
 		}
 	}
 }

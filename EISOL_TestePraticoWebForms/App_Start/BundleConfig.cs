@@ -34,7 +34,11 @@ namespace EISOL_TestePraticoWebForms
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
-            ScriptManager.ScriptResourceMapping.AddDefinition(
+			bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
+				"~/Scripts/jquery.maskedinput.js",
+				"~/Scripts/jquery.maskedinput.min.js"));
+
+			ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",
                 new ScriptResourceDefinition
                 {
