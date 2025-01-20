@@ -36,6 +36,8 @@
 ### Tarefa 2
 #### Objetivos principais:
 - Criação de script de validação dos campos do formulário
+- Submissão dos dados do formulário
+  
 #### Objetivos secundários:
 - Máscara do campo de CPF
 - Máscara do campo de telefone
