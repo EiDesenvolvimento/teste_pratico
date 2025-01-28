@@ -130,6 +130,99 @@
             <strong>Muito Bom!</strong> Você conseguiu salvar os dados no banco de dados... será? Vou verificar isso depois.
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            function clearErrors() {
+                $(".validation-error").remove(); 
+            }
+
+            // Função para exibir mensagem de erro abaixo do campo
+            function showError(element, message) {
+                $(element).after(`<span class="validation-error text-danger" style="font-size: 12px;">${message}</span>`);
+            }
+
+            //Máscara para data de nascimento
+            $("#<%= txtDataNascimento.ClientID %>").on("input", function () {
+                let value = $(this).val().replace(/\D/g, ""); 
+                if (value.length > 2) {
+                    value = value.replace(/^(\d{2})/, "$1/"); 
+                }
+                if (value.length > 5) {
+                    value = value.replace(/^(\d{2}\/\d{2})/, "$1/"); 
+                }
+                value = value.substring(0, 10); 
+                $(this).val(value);
+            });
+
+            // Máscara para CPF
+            $("#<%= txtCpf.ClientID %>").on("input", function () {
+                let value = $(this).val().replace(/\D/g, "").substring(0, 11);
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+                $(this).val(value);
+            });
+
+            // Máscara para telefone
+            $("#<%= txtTelefone.ClientID %>").on("input", function () {
+                let value = $(this).val().replace(/\D/g, "").substring(0, 11);
+                value = value.replace(/^(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3");
+                $(this).val(value);
+            });
+
+            $("#<%= btnGravar.ClientID %>").click(function (e) {
+                e.preventDefault(); 
+                clearErrors();
+                let isValid = true;
+
+                //Nome
+                let nome = $("#<%= txtNome.ClientID %>");
+                if (nome.val().trim() === "") {
+                    isValid = false;
+                    showError(nome, "O campo Nome é obrigatório.");
+                }
+
+                let telefone = $("#<%= txtTelefone.ClientID %>");
+                if (!/^\(\d{2}\) \d{4,5}-\d{4}$/.test(telefone.val().trim())) {
+                    isValid = false;
+                    showError(telefone, "O telefone deve estar no formato (XX) XXXXX-XXXX.");
+                }
+
+                // CPF
+                let cpf = $("#<%= txtCpf.ClientID %>");
+                if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf.val().trim())) {
+                    isValid = false;
+                    showError(cpf, "O CPF é inválido ou está vazio.");
+                }
+
+                // Email
+                let email = $("#<%= txtEmail.ClientID %>");
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.val().trim())) {
+                    isValid = false;
+                    showError(email, "O Email é inválido ou está vazio.");
+                }
+
+                // Data de nascimento
+                let dataNascimento = $("#<%= txtDataNascimento.ClientID %>");
+                if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dataNascimento.val().trim())) {
+                    isValid = false;
+                    showError(dataNascimento, "A data de nascimento deve estar no formato DD/MM/YYYY.");
+                }
+
+                // Sexo
+                let sexo = $("#<%= ddlSexo.ClientID %>");
+                if (sexo.val() === "[Selecione]") {
+                    isValid = false;
+                    showError(sexo, "O campo Sexo é obrigatório.");
+                }
+
+                if (isValid) {
+                    alert("Formulário válido! Enviando...");
+                }
+            });
+        });
+
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ScriptContent" runat="server">
     <script src="Scripts/ClientSide/tarefa2.js"></script>

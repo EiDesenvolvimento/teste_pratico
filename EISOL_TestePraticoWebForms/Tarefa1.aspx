@@ -105,10 +105,13 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" />
+            <asp:Button ID="btnGravar" runat="server" Text="Gravar" CssClass="btn btn-default" onClick="btnGravar_Click"/>
             <a class="btn btn-primary" href="Default.aspx">Voltar</a>
         </div>
     </div>
+
+   <!--  <asp:GridView ID="gvPessoas" runat="server" AutoGenerateColumns="true" CssClass="table table-striped"></asp:GridView> -->
+
     <div runat="server" visible="false" id="divAlerta">
         <div class="row">
             &nbsp;
@@ -116,5 +119,10 @@
         <div class="alert alert-success" role="alert">
             <strong>Muito Bom!</strong> Você conseguiu salvar os dados no banco de dados... será? Vou verificar isso depois :p.
         </div>
+
     </div>
+
+    <script>
+        
+    </script>
 </asp:Content>
