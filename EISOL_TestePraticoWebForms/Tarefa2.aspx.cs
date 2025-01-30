@@ -37,18 +37,37 @@ namespace EISOL_TestePraticoWebForms
 
             var pessoa = new DAO.PESSOAS();
 
-			// Parece que faltam algumas coisas aqui! =/
+            // Parece que faltam algumas coisas aqui! =/
 
-			// O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
-			// As pessoas não são objetos mas aqui podemos considerá-las assim =S
-			// - Faça as devidas atribuições ao objeto 'pessoa' para que ela seja uma pessoa de verdade e feliz!
+            // O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
+            // As pessoas não são objetos mas aqui podemos considerá-las assim =S
+            // - Faça as devidas atribuições ao objeto 'pessoa' para que ela seja uma pessoa de verdade e feliz!
 
-			// Verifique os tamanhos dos campos da tabela e a obrigatoriedade deles e faça o devido tratamento para evitar erros.
-			// - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
+            // Verifique os tamanhos dos campos da tabela e a obrigatoriedade deles e faça o devido tratamento para evitar erros.
+            // - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
 
-			// Coloque o seu lindo código aqui! (O_o)
+            // Coloque o seu lindo código aqui! (O_o)
 
-			this.Gravar(pessoa);
+            divAlerta.Visible = false;
+
+            try
+            {
+                pessoa.NOME = txtNome.Text.Trim();
+                pessoa.CPF = txtCpf.Text.Trim();
+                pessoa.RG = txtRg.Text.Trim();
+                pessoa.TELEFONE = txtTelefone.Text.Trim();
+                pessoa.EMAIL = txtEmail.Text.Trim();
+                pessoa.SEXO = ddlSexo.SelectedValue;
+
+                if (DateTime.TryParse(txtDataNascimento.Text, out DateTime dt))
+                    pessoa.DATA_NASCIMENTO = dt;
+
+                this.Gravar(pessoa);
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"<script>alert('Erro ao gravar: {ex.Message}');</script>");
+            }
         }
 
         /// <summary>
