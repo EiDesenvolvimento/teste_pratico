@@ -34,5 +34,19 @@ namespace EISOL_TestePraticoWebForms
 
         // Cadê o evento?
         // É isso que você deve fazer para finalizar essa tarefa!
+        protected void ddlUf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Pega a UF selecionada
+            decimal ufSelecionada = Convert.ToDecimal(ddlUf.SelectedValue);
+
+            // Chama o método que filtra as cidades só da UF selecionada
+            var listaFiltrada = new BLL.CIDADES().CarregarPorUF(ufSelecionada);
+
+            ddlCidades.Items.Clear();
+            ddlCidades.DataSource = listaFiltrada;
+            ddlCidades.DataTextField = "NOME";
+            ddlCidades.DataValueField = "COD_CIDADE";
+            ddlCidades.DataBind();
+        }
     }
 }
