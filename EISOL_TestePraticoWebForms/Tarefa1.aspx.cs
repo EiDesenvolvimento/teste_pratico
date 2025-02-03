@@ -12,33 +12,39 @@ namespace EISOL_TestePraticoWebForms
 		}
 
 		protected void btnGravar_Click(object sender, EventArgs e)
+
 		{
-			/* Olá!
-             * Trabalhamos com camadas de acesso a dados e negócios, isso também é conhecido por arquitetura em camadas ou N-Tier.
-             * Observe que passamos um objeto tipado da camada de acesso (DAO - Data Access Object).
-             * E devemos utilizar esse objeto DAO e chamar os métodos da camada de negócios (BLL - Business Logical Layer).
-             * É o que por padrão o MVC te induz a fazer, mas aqui no WebForms devemos ter esse cuidado para não dificultar as coisas criando códigos macarrônicos (eita).
-             * Você está livre para espiar os códigos e entender o seu funcionamento.
-             * Só não vai me bagunçar os códigos pois deu muito trabalho fazer tudo isso aqui =/
-             * */
 			var pessoa = new DAO.PESSOAS();
 
-			// Parece que faltam algumas coisas aqui! =/
+            // Validação de campos obrigatórios no servidor
+            if (string.IsNullOrWhiteSpace(txtNome.Text))
+			{
+				msgErro.Text = "Preencha o campo NOME";
+				msgErro.Visible = true;
+				return;
+			}
 
-			// O Objeto pessoa não parece ser uma pessoa de verdade ainda. 
-			// As pessoas não são objetos mas aqui podemos considerá-las assim =S
-			// - Faça as devidas atribuições ao objeto 'pessoa' para que ela seja uma pessoa de verdade e feliz!
+            if (string.IsNullOrWhiteSpace(txtCpf.Text))
+            {
+                msgErro.Text = "Preencha o campo CPF";
+                msgErro.Visible = true;
+                return;
+            }
 
-			// Verifique os tamanhos dos campos da tabela e a obrigatoriedade deles e faça o devido tratamento para evitar erros.
-			// - O leiaute da tabela em questão (TB_TESTE_PESSOAS) poderá ser verificado nos arquivos .sql anexados ao projeto.
+            // Limitação do tamanho dos campos
+            pessoa.NOME = txtNome.Text.Length > 200 ? txtNome.Text.Substring(0, 200) : txtNome.Text;
+            pessoa.CPF = txtCpf.Text.Length > 11 ? txtCpf.Text.Substring(0, 11) : txtCpf.Text;
+            pessoa.RG = txtRg.Text.Length > 15 ? txtRg.Text.Substring(0, 15) : txtRg.Text;
+            pessoa.TELEFONE = txtTelefone.Text.Length > 20 ? txtTelefone.Text.Substring(0, 20) : txtTelefone.Text;
+            pessoa.EMAIL = txtEmail.Text.Length > 200 ? txtEmail.Text.Substring(0, 200) : txtEmail.Text;
+            pessoa.SEXO = ddlSexo.SelectedValue;
+            pessoa.DATA_NASCIMENTO = (DateTime)(DateTime.TryParse(txtDataNascimento.Text, out var data) ? data : (DateTime?) null);
 
-			/* SEU OBJETIVO (TAREFA 1)
-             * Envie um objeto com dados, passando pela camada de negócios e que possibilite salvar os dados do formulário preenchido no banco de dados.
-             */
+            // Preenchimento do objeto de persistência
+            this.Gravar(pessoa);
 
-			// Coloque o seu lindo código aqui! (O_o)
-
-			this.Gravar(pessoa);
+			// Limpar os campos do formulário após salvar os dados
+			this.Limpar();
 		}
 
 		/// <summary>
@@ -65,8 +71,15 @@ namespace EISOL_TestePraticoWebForms
 		/// </summary>
 		private void Limpar()
 		{
-			// Isso é apenas um bônus!
-			// Tente fazê-lo e colocar em um lugar apropriado no código.
-		}
+            txtNome.Text = string.Empty;
+            txtCpf.Text = string.Empty;
+            txtRg.Text = string.Empty;
+            txtTelefone.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            ddlSexo.SelectedIndex = 0;
+            txtDataNascimento.Text = string.Empty;
+            msgErro.Visible = false;
+            divAlerta.Visible = false;
+        }
 	}
 }
